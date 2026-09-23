@@ -309,7 +309,7 @@ CI run: [pipeline · main](https://github.com/ali-ezz/ai-iti-rag-assistant/actio
 - [x] Root README (this file) sufficient for a stranger to run the project
 - [x] Public GitHub repository, clean history (no `.venv`, no `.env`, no raw corpus dump)
 - [x] End-to-end path: question → API → retrieval → LLM → grounded answer on screen
-- [ ] Live demo + recorded video walkthrough (submitted with the form)
+- [x] Live demo + recorded video walkthrough — [`demo/demo-video.mp4`](demo/demo-video.mp4) + presentation PDF in `demo/`
 
 ---
 

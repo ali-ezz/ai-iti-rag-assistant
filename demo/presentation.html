@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>AI-ITI Study Assistant — Presentation</title>
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Calibri, system-ui, sans-serif; background: #0f172a; color: #f8fafc; }
+  .slide { width: 1280px; height: 720px; padding: 48px 64px; page-break-after: always; position: relative; border-top: 8px solid #818cf8; }
+  h1 { font-size: 56px; margin-bottom: 16px; }
+  h2 { font-size: 40px; margin-bottom: 8px; }
+  .sub { color: #94a3b8; font-size: 22px; margin-bottom: 32px; }
+  .accent { color: #818cf8; }
+  .muted { color: #94a3b8; }
+  ul { list-style: none; }
+  li { font-size: 26px; margin: 18px 0; padding-left: 8px; }
+  li:before { content: "▸ "; color: #818cf8; }
+  .grid { display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
+  .card { background: #1e293b; border-radius: 16px; padding: 28px; flex: 1; min-width: 200px; text-align: center; }
+  .card .big { font-size: 48px; color: #34d399; font-weight: 700; }
+  .card .label { color: #94a3b8; font-size: 18px; margin-top: 8px; }
+  .flow { display: flex; align-items: center; gap: 12px; margin-top: 80px; justify-content: center; }
+  .box { background: #1e293b; border-radius: 16px; padding: 28px 20px; width: 220px; text-align: center; font-size: 20px; font-weight: 600; }
+  .arrow { font-size: 36px; color: #818cf8; }
+  .two { display: flex; gap: 40px; margin-top: 24px; }
+  .two > div { flex: 1; }
+  .center { text-align: center; margin-top: 220px; }
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <div class="center">
+    <h1>AI-ITI Study Assistant</h1>
+    <p class="accent" style="font-size:28px">RAG-Powered Document Assistant over course lab material</p>
+    <p class="muted" style="font-size:22px; margin-top:24px">Ali Ezz Ali · Level 2 Summer Training · Core Track · Individual</p>
+    <p class="muted" style="font-size:20px; margin-top:40px">github.com/ali-ezz/ai-iti-rag-assistant</p>
+  </div>
+</div>
+
+<div class="slide">
+  <h2>Problem &amp; Goal</h2>
+  <p class="sub">Grounded answers only from course material</p>
+  <ul>
+    <li>Students need quick, trustworthy answers from 12 lab notebooks (OOP → Transformers).</li>
+    <li>A plain LLM invents content — unacceptable for study help.</li>
+    <li>Goal: full product — raw docs → notebook → FastAPI → Streamlit → GitHub.</li>
+    <li>Answer must cite which document / section / chunk it came from.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h2>Architecture</h2>
+  <p class="sub">Question → retrieve → grounded generate → cited answer</p>
+  <div class="flow">
+    <div class="box">Streamlit UI<br/>:8501</div>
+    <div class="arrow">→</div>
+    <div class="box">FastAPI<br/>/query :8000</div>
+    <div class="arrow">→</div>
+    <div class="box">Chroma<br/>top-4 cosine</div>
+    <div class="arrow">→</div>
+    <div class="box">Ollama<br/>qwen2.5:1.5b</div>
+  </div>
+  <p class="muted" style="margin-top:48px; font-size:18px">
+    Embeddings: paraphrase-multilingual-MiniLM-L12-v2 · persisted store · temp 0.1 · [Source N] citations
+  </p>
+</div>
+
+<div class="slide">
+  <h2>Data &amp; Chunking</h2>
+  <p class="sub">Core Track — text-only corpus</p>
+  <ul>
+    <li>12 solved lab notebooks → cleaned Markdown — no OCR needed.</li>
+    <li>Split by Markdown section, then 320-word windows with 60-word overlap.</li>
+    <li>264 chunks indexed into Chroma (cosine HNSW) — persisted for the API.</li>
+    <li>Metadata on every chunk: source, section, chunk_id → human-readable citations.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h2>Grounding &amp; anti-hallucination</h2>
+  <p class="sub">Strict context-only generation</p>
+  <ul>
+    <li>System prompt: answer ONLY from supplied context; refusal if insufficient.</li>
+    <li>Numbered [Source 1..k] context blocks; model must cite factual claims.</li>
+    <li>Low temperature (0.1), short max tokens, de-duplicated sources in API response.</li>
+    <li>UI shows expandable source cards under every answer.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h2>Evaluation</h2>
+  <p class="sub">12 test questions · CI-run notebook · results.csv</p>
+  <div class="grid">
+    <div class="card"><div class="big">12 / 12</div><div class="label">Retrieval hit rate @4</div></div>
+    <div class="card"><div class="big">12 / 12</div><div class="label">Answers with citations</div></div>
+    <div class="card"><div class="big">264</div><div class="label">Chunks from 12 docs</div></div>
+  </div>
+  <ul style="margin-top:36px">
+    <li style="font-size:22px">Failures: overlapping terms, broad questions, small LLM truncation.</li>
+    <li style="font-size:22px">Mitigations: section chunks + overlap, top-4, strict prompt, refusal path.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h2>Live demo</h2>
+  <p class="sub">What we will show</p>
+  <ul>
+    <li>1. Open Streamlit chat UI at localhost:8501.</li>
+    <li>2. Ask: “How does Non-Max Suppression remove duplicate detections?”</li>
+    <li>3. Show grounded answer + Sources expander (LAB-05).</li>
+    <li>4. Ask: stemming vs lemmatization → LAB-08.</li>
+    <li>5. Show GET /health → vector store + Ollama ready.</li>
+    <li>6. Repo: structure, tests, CI green.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h2>Tech stack &amp; deliverables</h2>
+  <div class="two">
+    <div>
+      <p class="accent" style="font-size:22px; margin-bottom:12px">Stack</p>
+      <ul>
+        <li style="font-size:20px">Python 3.12 · FastAPI · Streamlit</li>
+        <li style="font-size:20px">ChromaDB · sentence-transformers</li>
+        <li style="font-size:20px">Ollama qwen2.5:1.5b · pytest</li>
+        <li style="font-size:20px">Docker Compose · GitHub Actions</li>
+        <li style="font-size:20px">uv · Makefile</li>
+      </ul>
+    </div>
+    <div>
+      <p class="accent" style="font-size:22px; margin-bottom:12px">Checklist</p>
+      <ul>
+        <li style="font-size:20px">✓ Executed rag_pipeline.ipynb</li>
+        <li style="font-size:20px">✓ /health + /query + tests</li>
+        <li style="font-size:20px">✓ Chat UI with cited sources</li>
+        <li style="font-size:20px">✓ Persisted vector store</li>
+        <li style="font-size:20px">✓ README + public GitHub + 100% eval</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="center">
+    <h1>Thank you</h1>
+    <p class="accent" style="font-size:26px">github.com/ali-ezz/ai-iti-rag-assistant</p>
+    <p class="muted" style="font-size:20px; margin-top:20px">Ali Ezz Ali · Level 2 · Core Track · Ready for Q&A</p>
+  </div>
+</div>
+
+</body>
+</html>
