@@ -1,0 +1,128 @@
+question,retrieved_source,answer,retrieval_correct,citation_grounded
+What are inheritance and polymorphism in Python OOP?,LAB-01-OOP,"Inheritance and polymorphism are two fundamental concepts in Object-Oriented Programming (OOP) in Python.
+
+1. Inheritance: Inheritance allows a class to inherit properties and methods from another class. This means that a subclass can reuse the code of its superclass, reducing redundancy and improving code organization. The subclass can also override or extend the methods and attributes of the superclass, providing a more specialized implementation. In Python, the `abc` module is used to create abstract base classes, which are essential for enforcing the inheritance hierarchy and ensuring that subclasses implement specific methods.
+
+2. Polymorphism: Polymorphism refers to the ability of objects to take on many forms. In Python, polymorphism is achieved through method overriding, where a subclass can provide a specific implementation of a method that is already defined in its superclass. This allows the same method name to be used for different types of objects, enabling the same method to be called on objects of different classes. Python's dynamic nature allows for method overriding, making polymorphism a powerful feature that enhances code flexibility and reusability.
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+How does a Python generator differ from a normal function?,LAB-12-Transformers,"A Python generator differs from a normal function in several key ways:
+
+1. **Return Type**: A generator function returns an iterator, which is an object that can be iterated over. It yields values one at a time, rather than returning them all at once.
+
+2. **Memory Efficiency**: Generators are memory-efficient because they generate values on-the-fly, rather than storing them in memory. This is particularly useful for large datasets.
+
+3. **Syntax**: Generators use the `yield` keyword instead of `return`. This allows them to pause execution and resume later, making them ideal for processing large datasets or infinite sequences.
+
+4. **Use Case**: Generators are often used for processing large datasets, generating sequences, or when you want to yield values one at a time without storing them in memory.
+
+5. **Syntax**: While a normal function can also be used to generate values, a generator is more concise and readable for generating sequences or processing data in chunks.
+
+6. **Iteration**: Generators can be used in loops to iterate over a sequence of values, which is not possible with
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+What steps does Canny edge detection use?,LAB-05-Object-Detection,"Canny edge detection uses the following steps:
+
+1. **Gaussian Blur**: The input image is first blurred using a Gaussian kernel to reduce noise and smooth the image.
+2. **Sobel Gradients**: The blurred image is then transformed into its gradient components using the Sobel operator, which calculates the gradient magnitude and direction.
+3. **Non-Maximum Suppression**: The gradient magnitude is thresholded to identify strong edges, and the non-maximum suppression step is applied to thin the edges to local maxima along the gradient direction.
+4. **Hysteresis Thresholding**: A double threshold is applied to the edges identified in the previous step. Strong edges are kept outright, while weak edges are retained only if they are connected to a strong edge. This step helps in removing false positives and preserving the edges.
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+Why do residual connections help a ResNet train?,LAB-03-Computer-Vision,"Residual connections help a ResNet train by stabilizing the gradient flow through the network. By adding a skip connection that passes the input through unchanged, residual connections allow gradients to flow directly back to earlier layers, bypassing the problem of vanishing gradients that can occur in deeper networks. This helps prevent the gradients from becoming too small or too large, which can hinder the training process. The identity shortcut in the residual connection ensures that the gradients can still pass through the network, even if the transformations in the network layers are complex or non-linear. This makes the training process more stable and easier to converge, as the gradients can flow more naturally through the network.
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+How does Non-Max Suppression remove duplicate detections?,LAB-05-Object-Detection,"Non-Max Suppression (NMS) removes duplicate detections by ensuring that only the most confident and accurate box is kept for each object class. It works by:
+
+1. **Filtering by Confidence Threshold**: Any box with a confidence score below a certain threshold (e.g., `score < 0.6`) is dropped.
+2. **Keeping the Highest Scoring Box**: The remaining boxes are sorted by their confidence scores, and the highest-scoring box is kept.
+3. **Eliminating Overlapping Boxes**: Any remaining boxes that overlap heavily with the highest-scoring box (IoU ≥ some threshold, e.g., 0.5) are dropped.
+4. **Repeating the Process**: Steps 2 and 3 are repeated until no boxes remain.
+
+This process ensures that only the most accurate and confident detections are kept, effectively cleaning up duplicate detections and improving the overall quality of the detection results.
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+What are the main stages of the YOLO mini-project?,LAB-06-YOLO,"The main stages of the YOLO mini-project typically include:
+
+1. **Preparation and Setup**:
+   - Setting up the environment with necessary libraries and dependencies.
+   - Installing and configuring the required software and tools.
+
+2. **Fine-tuning**:
+   - Preparing the dataset for fine-tuning.
+   - Fine-tuning the model on the dataset with a specific task or class.
+   - Training the model to adapt to the new task or classes.
+
+3. **Inference**:
+   - Running the fine-tuned model on new data to evaluate its performance.
+   - Testing the model's ability to detect the new classes and perform as expected.
+
+4. **Evaluation and Analysis**:
+   - Analyzing the model's performance on the fine-tuned dataset.
+   - Comparing the performance with the original model to assess improvements.
+   - Identifying any issues or areas for further improvement.
+
+5. **Deployment**:
+   - Deploying the fine-tuned model for real-world use.
+   - Ensuring the model is ready for production use.
+
+6. **Documentation
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+Why is the pretrained base model frozen before fine-tuning?,LAB-07-Transfer-Learning,"The pretrained base model is frozen before fine-tuning to prevent the loss of learning from the ImageNet dataset during the initial training. This ensures that the base model retains the benefits of pre-trained knowledge, allowing for efficient fine-tuning on the specific dataset without losing the learned features.
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+What is the difference between stemming and lemmatization?,LAB-08-NLP-Preprocessing,"Stemming and lemmatization are both text-normalization techniques used before feature extraction, but they differ in their approach and outcome.
+
+Stemming:
+- Applies heuristic rules to remove word endings and can produce a root that is not a dictionary word.
+- Typically faster than lemmatization.
+- Useful when the goal is to reduce the vocabulary size and speed up processing.
+- Often used in preprocessing steps before feature extraction.
+
+Lemmatization:
+- Uses vocabulary and grammatical information to return a valid base form or lemma.
+- Produces a word that is linguistically cleaner and more semantically meaningful.
+- Generally slower than stemming.
+- Useful when the goal is to obtain a more accurate representation of the original word, especially in natural language processing tasks.
+
+In summary, stemming is a simpler, faster method that aims to reduce the vocabulary size, while lemmatization provides a more accurate and semantically meaningful representation of words.
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+How are POS tagging and named entity recognition different?,LAB-09-Sentiment-POS-NER,"POS tagging and named entity recognition are distinct NLP tasks that serve different purposes. 
+
+POS tagging assigns grammatical categories to each word in a sentence, such as noun, verb, adjective, etc. It helps in understanding the syntactic structure of the sentence. For example, in the sentence ""The quick brown fox jumps over the lazy dog,"" POS tagging would identify ""The"" as a determiner, ""quick"" as an adjective, and ""fox"" as a noun.
+
+On the other hand, named entity recognition (NER) identifies and classifies real-world entities such as persons, organizations, locations, and miscellaneous entities. It labels these entities with specific categories like PERSON, ORGANIZATION, LOCATION, etc. For instance, in the sentence ""Bill Gates founded Microsoft,"" NER would identify ""Bill Gates"" as a PERSON and ""Microsoft"" as an ORGANIZATION.
+
+While both tasks are part of natural language processing (NLP), they are separate and distinct. POS tagging focuses on the grammatical role of words, whereas NER identifies and categorizes named entities.
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+How do LDA and LSA differ in topic modeling?,LAB-10-Topic-Modeling,"LDA (Latent Dirichlet Allocation) and LSA (Latent Semantic Analysis) are both unsupervised topic modeling techniques, but they differ in their approach and application:
+
+1. **Modeling Approach**:
+   - **LSA**: Uses Singular Value Decomposition (SVD) to find the most significant principal components of the document-term matrix. It assumes that the documents are composed of a small number of latent topics.
+   - **LDA**: Uses a probabilistic model to identify the underlying topics in a collection of documents. It assumes that documents are mixtures of topics, and each topic is a distribution over words.
+
+2. **Topic Distribution**:
+   - **LSA**: Produces a matrix of singular values and singular vectors, which can be used to visualize the topics. The topics are represented as a set of principal components.
+   - **LDA**: Outputs a topic distribution for each document, indicating the probability of each topic occurring in the document. The topics are represented as a set of words, with the probability of each word in the topic.
+
+3.
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+Which preprocessing steps were used for Arabic text?,LAB-11-Arabic-NLP,"The preprocessing steps used for Arabic text in this context include:
+
+1. Removing diacritics and the tatweel.
+2. Normalizing the `أإآ→ا ة→ه ى→ي`.
+3. Removing URLs, numbers, and punctuations, keeping only Arabic letters.
+4. Collapsing spaces.
+5. Removing Arabic stopwords.
+6. Dropping tokens with a length less than or equal to 1.
+
+These steps were applied to the `Processed Text` column in the `summarizdataset.csv` file, resulting in a text that is processed and ready for further analysis.
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
+Why do Transformers require positional encoding?,LAB-12-Transformers,"Transformers require positional encoding because the attention mechanism in the model is position-agnostic. This means that the model does not inherently understand the order or position of tokens in the sequence. Positional encoding injects this positional information into the input sequence, allowing the model to effectively attend to different parts of the sequence based on their relative positions. This is crucial for the Transformer's ability to handle sequential data and capture dependencies between tokens in the sequence.
+
+Retrieved evidence: [Source 1], [Source 2], [Source 3], [Source 4]",True,True
