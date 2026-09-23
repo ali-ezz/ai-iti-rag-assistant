@@ -1,0 +1,8 @@
+-r backend/requirements.in
+-r frontend/requirements.in
+jupyter
+nbclient
+nbformat
+pandas
+ruff
+

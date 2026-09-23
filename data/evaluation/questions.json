@@ -1,0 +1,15 @@
+[
+  {"question": "What are inheritance and polymorphism in Python OOP?", "expected_source": "LAB-01-OOP", "keywords": ["inheritance", "polymorphism"]},
+  {"question": "How does a Python generator differ from a normal function?", "expected_source": "LAB-02-Advanced-Python", "keywords": ["yield", "generator"]},
+  {"question": "What steps does Canny edge detection use?", "expected_source": "LAB-03-Computer-Vision", "keywords": ["edge", "canny"]},
+  {"question": "Why do residual connections help a ResNet train?", "expected_source": "LAB-04-Deep-Vision", "keywords": ["residual", "resnet"]},
+  {"question": "How does Non-Max Suppression remove duplicate detections?", "expected_source": "LAB-05-Object-Detection", "keywords": ["iou", "confidence"]},
+  {"question": "What are the main stages of the YOLO mini-project?", "expected_source": "LAB-06-YOLO", "keywords": ["inference", "dataset"]},
+  {"question": "Why is the pretrained base model frozen before fine-tuning?", "expected_source": "LAB-07-Transfer-Learning", "keywords": ["freeze", "pretrained"]},
+  {"question": "What is the difference between stemming and lemmatization?", "expected_source": "LAB-08-NLP-Preprocessing", "keywords": ["stemming", "lemmatization"]},
+  {"question": "How are POS tagging and named entity recognition different?", "expected_source": "LAB-09-Sentiment-POS-NER", "keywords": ["pos", "entity"]},
+  {"question": "How do LDA and LSA differ in topic modeling?", "expected_source": "LAB-10-Topic-Modeling", "keywords": ["lda", "lsa"]},
+  {"question": "Which preprocessing steps were used for Arabic text?", "expected_source": "LAB-11-Arabic-NLP", "keywords": ["arabic", "preprocessing"]},
+  {"question": "Why do Transformers require positional encoding?", "expected_source": "LAB-12-Transformers", "keywords": ["position", "sequence"]}
+]
+
